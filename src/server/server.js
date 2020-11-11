@@ -1,3 +1,6 @@
+const dotenv = require('dotenv');
+dotenv.config();
+
 const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
@@ -31,9 +34,9 @@ app.post("/formdata",async (req,res)=>{
 })
 // api keys
 const apiKeys = {
-    api_key_geo:"ardeshir",
-    api_key_weatherbit:"00d059bd2cfe43f4b72bd15204c392f4",
-    api_key_pixabay:"19047406-4088c00f011e020a9d4ae2608"
+    api_key_geo:process.env.api_key_geo,
+    api_key_weatherbit:process.env.api_key_weatherbit,
+    api_key_pixabay:process.env.api_key_pixabay
 
 }
 
