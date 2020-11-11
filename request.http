@@ -1,6 +1,6 @@
 
 # GeoName
-# GET http://api.geonames.org/postalCodeSearchJSON?placename=Montreal&maxRows=10&username=ardeshir
+GET http://api.geonames.org/postalCodeSearchJSON?placename=Montreal&maxRows=10&username=ardeshir
 
 # weatherbit
 

@@ -1,9 +1,10 @@
 const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
+const fetch = require('node-fetch')
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:true}))
-const port = 4000
+const port = 5000
 // app.get('/',(req,res)=>{
 //     res.sendFile('./dist/index.html')
 // })
@@ -12,15 +13,14 @@ const server = app.listen(port,()=>{
     console.log(`app is running on ${port}`)
 })
 // set up form submit data
-app.post("/form",(req,res)=>{
+app.post("/formdata",(req,res)=>{
     // console.log(req.url)
     console.log(req.body)
-    form_submit_data["travel_from"]=req.body['travel-from']
-    form_submit_data["travel_to"]=req.body['travel-to']
-    form_submit_data["travel_depart"]=req.body['travel-depart']
-    form_submit_data["travel_return"]=req.body['travel-returns']
-    console.log(form_submit_data)
-    res.end("server has recieved form data")
+    // form_submit_data["travel_from"]=req.body['travel-from']
+    // form_submit_data["travel_to"]=req.body['travel-to']
+    // form_submit_data["travel_depart"]=req.body['travel-depart']
+    // form_submit_data["travel_return"]=req.body['travel-returns']
+    
     
 })
 // api keys
@@ -33,3 +33,16 @@ const apiKeys = {
 
 // form submit data to store
 let form_submit_data = {}
+
+// set up get route for longlat function
+app.get("/longlat",async (req,res)=>{
+    console.log("im server trying get api ")
+    // const city_to_get = form_submit_data['travel_to'].charAt(0).tuUpperCase()+form_submit_data.travel_to.slice(1)
+    const response = await fetch(`http://api.geonames.org/postalCodeSearchJSON?placename=${form_submit_data.travel_to}&maxRows=10&username=${apiKeys.api_key_geo}`)
+    const data =await response.json()
+    const lng = data["postalCodes"][0]["lng"]
+    const lat = data["postalCodes"][0]["lat"]
+    console.log(lng,lat)
+    res.send(lng,lat)
+
+})
