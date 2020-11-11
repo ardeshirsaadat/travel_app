@@ -1,6 +1,6 @@
 import "./styles/styles.scss"
 // import "./js/application.js"
 import {testFunction} from './js/application'
-import {fetchFormData} from './js/fetchFormData'
+import {fetchFormData,getWeather,getPicture} from './js/fetchFormData'
 
-export {testFunction,fetchFormData}
+export {testFunction,fetchFormData,getWeather,getPicture}
