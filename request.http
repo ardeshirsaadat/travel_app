@@ -4,8 +4,8 @@
 
 # weatherbit
 
-# GET https://api.weatherbit.io/v2.0/forecast/daily?key=00d059bd2cfe43f4b72bd15204c392f4&lat=37.795343&lon=-95.936818
+GET https://api.weatherbit.io/v2.0/forecast/daily?key=00d059bd2cfe43f4b72bd15204c392f4&lat=37.795343&lon=-95.936818
 
 
 # pixabay
-GET https://pixabay.com/api/?key=19047406-4088c00f011e020a9d4ae2608&q=Montreal&image_type=photo&category=nature&per_page=3
+# GET https://pixabay.com/api/?key=19047406-4088c00f011e020a9d4ae2608&q=Montreal&image_type=photo&category=nature&per_page=3

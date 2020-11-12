@@ -23,6 +23,7 @@ app.post("/formdata",async (req,res)=>{
     form_submit_data["travel_to"]=req.body.travel_to
     form_submit_data["travel_depart"]=req.body.travel_depart
     form_submit_data["travel_return"]=req.body.travel_return
+    form_submit_data["days_left_to_departure"] = req.body.days_left_to_departure
     const response = await fetch(`http://api.geonames.org/postalCodeSearchJSON?placename=${form_submit_data.travel_to}&maxRows=10&username=${apiKeys.api_key_geo}`)
     const data =await response.json()
     const lon = data["postalCodes"][0]["lng"]
@@ -49,14 +50,28 @@ app.post("/weather",async (req,res)=>{
     // const city_to_get = form_submit_data['travel_to'].charAt(0).tuUpperCase()+form_submit_data.travel_to.slice(1)
     const response = await fetch(`https://api.weatherbit.io/v2.0/forecast/daily?key=${apiKeys.api_key_weatherbit}&lat=${req.body.lat}&lon=${req.body.lon}`)
     const data =await response.json()
-    const tmp = data["data"][0]["high_temp"]
+    // use rest parameter to extract all data elements
+    const [...tmps] = data["data"]
+    // define temp_list to extract all temp forcasts
+    let temps_list = []
+    if (form_submit_data.days_left_to_departure <= 7){
+        temps_list = tmps[0]['temp']
+        res.send([temps_list])
+    }
+    else{
+        for (const {temp:n} of tmps){
+            
+            temps_list.push(n)
+        }
+        res.send([temps_list]) 
+    }
     
-    console.log(tmp)
-    res.send([tmp])
+    
 
 })
 // set up route to get picture from third api
 app.get("/picture",async (req,res)=>{
+
     const response = await fetch(`https://pixabay.com/api/?key=${apiKeys.api_key_pixabay}&q=${form_submit_data.travel_to}&image_type=photo&category=nature&per_page=3`)
     const data = await response.json()
     
