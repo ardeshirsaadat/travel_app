@@ -63,7 +63,7 @@ app.post("/weather",async (req,res)=>{
             
             temps_list.push(n)
         }
-        res.send([temps_list]) 
+        res.send(temps_list) 
     }
     
     

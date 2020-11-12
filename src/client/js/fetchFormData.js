@@ -36,16 +36,26 @@ async function getPicture(){
   
 }
 
-function calculateDaysToDeparture(dateOfDeparture){
-  const dateOne = new Date()
-  const dateTwo = new Date(dateOfDeparture)
+function calculateDaysDifference(day1,day2){
+  const dateOne = new Date(day1)
+  const dateTwo = new Date(day2)
   const differenceTime = dateTwo.getTime()- dateOne.getTime()
   const differenceDays = differenceTime/ (1000 * 3600 * 24)
   return differenceDays
 
 }
 
+function updateGui(array_of_data){
+  const myDocFrag = document.createDocumentFragment()
+  const updateElement = document.querySelector("#update")
+  for (const data of array_of_data){
+    const newElement = document.createElement('p')
+    newElement.innerHTML = data
+    myDocFrag.appendChild(newElement)
+  }
+  updateElement.appendChild(myDocFrag)
+}
 
 
 
-export {fetchFormData,getWeather,getPicture,calculateDaysToDeparture}
+export {fetchFormData,getWeather,getPicture,calculateDaysDifference,updateGui}
