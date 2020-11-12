@@ -22,9 +22,13 @@ function testFunction(event){
     fetchFormData(formData).then(res=>{
         getWeather(res[0],res[1]).then(res=>{
             updateGui(res)
+        }).catch(error=>{
+            console.log('destination not found')
         })
     })
-    getPicture()
+    getPicture().catch(error=>{
+        console.log("picture of your destination is not found")
+    })
 
     
 }

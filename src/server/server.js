@@ -25,11 +25,20 @@ app.post("/formdata",async (req,res)=>{
     form_submit_data["travel_return"]=req.body.travel_return
     form_submit_data["days_left_to_departure"] = req.body.days_left_to_departure
     const response = await fetch(`http://api.geonames.org/postalCodeSearchJSON?placename=${form_submit_data.travel_to}&maxRows=10&username=${apiKeys.api_key_geo}`)
+    try{
     const data =await response.json()
     const lon = data["postalCodes"][0]["lng"]
     const lat = data["postalCodes"][0]["lat"]
+    const country_code = data["postalCodes"][0]["countryCode"]
+    // get country's code & store in server
+    form_submit_data["country_code"] = country_code
     console.log(lon,lat)
     res.send([lon,lat])
+    }
+    catch(e){
+        console.error(e)
+        console.log("can not fetch data from api")
+    }
 
     
 })
@@ -49,6 +58,7 @@ app.post("/weather",async (req,res)=>{
     console.log("im server trying get api ")
     // const city_to_get = form_submit_data['travel_to'].charAt(0).tuUpperCase()+form_submit_data.travel_to.slice(1)
     const response = await fetch(`https://api.weatherbit.io/v2.0/forecast/daily?key=${apiKeys.api_key_weatherbit}&lat=${req.body.lat}&lon=${req.body.lon}`)
+    try{
     const data =await response.json()
     // use rest parameter to extract all data elements
     const [...tmps] = data["data"]
@@ -65,17 +75,38 @@ app.post("/weather",async (req,res)=>{
         }
         res.send(temps_list) 
     }
+}
+catch(e){
+    console.error(e)
+    console.log("can not fetch data from api")
+}
     
     
 
 })
 // set up route to get picture from third api
 app.get("/picture",async (req,res)=>{
-
+    try{
     const response = await fetch(`https://pixabay.com/api/?key=${apiKeys.api_key_pixabay}&q=${form_submit_data.travel_to}&image_type=photo&category=nature&per_page=3`)
     const data = await response.json()
+    // in case entered location brings up no result look for country's pictures
+    if (data["hits"] === 0){
+        const response = await fetch(`https://pixabay.com/api/?key=${apiKeys.api_key_pixabay}&q=${form_submit_data.travel_to}&image_type=photo&category=nature&per_page=3`)
+        const data = await response.json()
+        const url = data["hits"][0]["largeImageURL"]
+        console.log(url)
+        res.send([url])
+    }
+    else{
+        const url = data["hits"][0]["largeImageURL"]
+        console.log(url)
+        res.send([url])
+    }
+}
+catch(e){
+    console.error(e)
+    console.log("can not fetch data from api")
+}
     
-    const url = data["hits"][0]["largeImageURL"]
-    console.log(url)
-    res.send([url])
+    
 })
