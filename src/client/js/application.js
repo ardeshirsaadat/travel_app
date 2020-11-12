@@ -1,4 +1,4 @@
-import {fetchFormData,getWeather,getPicture} from "./fetchFormData"
+import {fetchFormData,getWeather,getPicture,calculateDaysToDeparture} from "./fetchFormData"
 
 
 function testFunction(event){
@@ -8,7 +8,9 @@ function testFunction(event){
     const travelTo = document.querySelector("#travel-to").value
     const travelDepart = document.querySelector("#travel-depart").value
     const travelReturn = document.querySelector("#travel-return").value
-    // console.log(travelFrom,travelTo,travelDepart,travelReturn)
+    // calculate days to departure
+    // console.log(calculateDaysToDeparture(travelDepart))
+    document.querySelector("h2").innerHTML = `${Math.round(calculateDaysToDeparture(travelDepart))} days`
     // fetch data form-data to server
     const formData = {"travel_from":travelFrom,"travel_to":travelTo,"travel_depart":travelDepart,"travel_return":travelReturn}
     // call fetchfromdata function

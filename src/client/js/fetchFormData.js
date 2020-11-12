@@ -36,7 +36,16 @@ async function getPicture(){
   
 }
 
+function calculateDaysToDeparture(dateOfDeparture){
+  const dateOne = new Date()
+  const dateTwo = new Date(dateOfDeparture)
+  const differenceTime = dateTwo.getTime()- dateOne.getTime()
+  const differenceDays = differenceTime/ (1000 * 3600 * 24)
+  return differenceDays
+
+}
 
 
 
-export {fetchFormData,getWeather,getPicture}
+
+export {fetchFormData,getWeather,getPicture,calculateDaysToDeparture}
