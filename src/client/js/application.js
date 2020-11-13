@@ -15,7 +15,7 @@ function testFunction(event){
     const daysLeft = Math.round(calculateDaysDifference(today,travelDepart))
     const durationOfTrip = Math.round(calculateDaysDifference(travelDepart,travelReturn))
     
-    document.querySelector("h2").innerHTML = `${daysLeft} days, duration:${durationOfTrip}`
+    document.querySelector("h2").innerHTML = `You have ${daysLeft} days until your departure and the duration of your trip is ${durationOfTrip} days`
     // fetch data form-data to server
     const formData = {"travel_from":travelFrom,"travel_to":travelTo,"travel_depart":travelDepart,"travel_return":travelReturn,"days_left_to_departure":daysLeft}
     // call fetchfromdata function

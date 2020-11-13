@@ -1,3 +1,77 @@
-p {
-  background: red;
+#screen {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: repeat(0.5fr, 1fr, 1fr, 0.5fr);
+  grid-template-areas:
+    "a a"
+    "b d"
+    "b d"
+    "c c";
+  background-color: #022638;
+  color: white;
+  align-items: center;
+  padding: 50px;
+}
+
+.header {
+  padding: 50px;
+  grid-area: a;
+  display: block;
+  #print {
+    &:hover {
+      cursor: pointer;
+    }
+    background-color: #4ab879;
+    color: white;
+  }
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  padding: 50px;
+  grid-area: b;
+  #travel-from {
+    width: 80%;
+    height: 40px;
+  }
+  #travel-to {
+    width: 80%;
+    height: 40px;
+  }
+  #travel-depart {
+    width: 80%;
+    height: 40px;
+  }
+  #travel-return {
+    width: 80%;
+    height: 40px;
+  }
+  #submit {
+    &:hover {
+      cursor: pointer;
+    }
+
+    color: white;
+    width: 80%;
+    height: 40px;
+    background-color: #4ab879;
+    margin-top: 30px;
+  }
+}
+
+.dynamic-contents {
+  padding: 50px;
+  grid-area: c;
+}
+
+.images {
+  grid-area: d;
+  padding: 50px;
+  height: 100%;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+h1 {
+  border-bottom: 0.1rem grey solid;
 }

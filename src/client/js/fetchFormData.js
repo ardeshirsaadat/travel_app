@@ -28,10 +28,14 @@ async function getWeather(lon,lat){
 }
 
 async function getPicture(){
-  const imgElement = document.querySelector("#img")
+  const imgElement = document.querySelector(".images")
+  console.log("a")
   const response = await fetch("/picture")
+  console.log("b")
   const url = await response.json()
-  await imgElement.setAttribute('src',url[0])
+  console.log("c")
+  await imgElement.setAttribute("style",`background-image:url("${url[0]}")`)
+  console.log("d")
 
   
 }

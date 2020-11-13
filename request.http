@@ -8,4 +8,4 @@
 
 
 # pixabay
-GET https://pixabay.com/api/?key=19047406-4088c00f011e020a9d4ae2608&q=CA&image_type=photo&category=nature&per_page=3
+GET https://pixabay.com/api/?key=19047406-4088c00f011e020a9d4ae2608&q=paris&image_type=photo&category=nature&per_page=3
