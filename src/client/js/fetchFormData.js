@@ -50,15 +50,22 @@ function calculateDaysDifference(day1,day2){
 }
 
 function updateGui(array_of_data){
-  const myDocFrag = document.createDocumentFragment()
-  const updateElement = document.querySelector("#update")
-  for (const data of array_of_data){
-    const newElement = document.createElement('p')
-    newElement.innerHTML = data
-    myDocFrag.appendChild(newElement)
+  const weatherElement = document.querySelector("#weather")
+  const countryElement = document.querySelector("#country")
+  const capitalElement = document.querySelector("#capital")
+  const populationElement = document.querySelector("#population")
+  const currencyElement = document.querySelector("#currency")
+  const languageElement = document.querySelector("#language")
+  weatherElement.innerHTML = array_of_data[0]
+  countryElement.innerHTML = array_of_data[1]
+  capitalElement.innerHTML = array_of_data[2]
+  populationElement.innerHTML = array_of_data[3]
+  currencyElement.innerHTML = array_of_data[5]
+  languageElement.innerHTML = array_of_data[4]
+  
+  
   }
-  updateElement.appendChild(myDocFrag)
-}
+
 
 
 

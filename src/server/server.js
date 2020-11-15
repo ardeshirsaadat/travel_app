@@ -58,23 +58,42 @@ app.post("/weather",async (req,res)=>{
     console.log("im server trying get api ")
     // const city_to_get = form_submit_data['travel_to'].charAt(0).tuUpperCase()+form_submit_data.travel_to.slice(1)
     const response = await fetch(`https://api.weatherbit.io/v2.0/forecast/daily?key=${apiKeys.api_key_weatherbit}&lat=${req.body.lat}&lon=${req.body.lon}`)
+    const response2 = await fetch(`https://restcountries.eu/rest/v2/alpha/${form_submit_data.country_code}`)
     try{
     const data =await response.json()
+    const data2 =await response2.json()
+    
     // use rest parameter to extract all data elements
     const [...tmps] = data["data"]
     // define temp_list to extract all temp forcasts
-    let temps_list = []
-    if (form_submit_data.days_left_to_departure <= 7){
-        temps_list = tmps[0]['temp']
-        res.send([temps_list])
-    }
-    else{
-        for (const {temp:n} of tmps){
+    let general_info_list = []
+    let temperature = tmps[0]['temp']
+    let country = data2.name
+    let capital = data2.capital
+    let population = data2.population
+    let language = data2.languages[0].name
+    let currency = data2.currencies[0].name
+    
+
+    general_info_list.push(temperature)
+    general_info_list.push(country)
+    general_info_list.push(capital)
+    general_info_list.push(population)
+    general_info_list.push(language)
+    general_info_list.push(currency)
+    res.send(general_info_list)
+
+    // if (form_submit_data.days_left_to_departure <= 7){
+    //     temps_list = tmps[0]['temp']
+    //     res.send([temps_list])
+    // }
+    // else{
+    //     for (const {temp:n} of tmps){
             
-            temps_list.push(n)
-        }
-        res.send(temps_list) 
-    }
+    //         temps_list.push(n)
+    //     }
+    //     res.send(temps_list) 
+    // }
 }
 catch(e){
     console.error(e)
