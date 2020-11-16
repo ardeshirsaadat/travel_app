@@ -10,8 +10,6 @@ function testFunction(event){
     const travelTo = document.querySelector("#travel-to").value
     const travelDepart = document.querySelector("#travel-depart").value
     const travelReturn = document.querySelector("#travel-return").value
-    // calculate days to departure
-    // console.log(calculateDaysToDeparture(travelDepart))
     const daysLeft = Math.round(calculateDaysDifference(today,travelDepart))
     const durationOfTrip = Math.round(calculateDaysDifference(travelDepart,travelReturn))
     
@@ -33,9 +31,5 @@ function testFunction(event){
 
     
 }
-
-// fetch form data function
-
-
 
 export {testFunction}

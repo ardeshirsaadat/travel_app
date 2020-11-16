@@ -8,17 +8,12 @@ const fetch = require('node-fetch')
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:true}))
 const port = 4000
-// app.get('/',(req,res)=>{
-//     res.sendFile('./dist/index.html')
-// })
 app.use(express.static('dist'))
 const server = app.listen(port,()=>{
     console.log(`app is running on ${port}`)
 })
 // set up form submit data
 app.post("/formdata",async (req,res)=>{
-    // console.log(req.url)
-    // console.log(req.body)
     form_submit_data["travel_from"]=req.body.travel_from
     form_submit_data["travel_to"]=req.body.travel_to
     form_submit_data["travel_depart"]=req.body.travel_depart
@@ -56,7 +51,6 @@ let form_submit_data = {}
 // set up route to get temp from second api
 app.post("/weather",async (req,res)=>{
     console.log("im server trying get api ")
-    // const city_to_get = form_submit_data['travel_to'].charAt(0).tuUpperCase()+form_submit_data.travel_to.slice(1)
     const response = await fetch(`https://api.weatherbit.io/v2.0/forecast/daily?key=${apiKeys.api_key_weatherbit}&lat=${req.body.lat}&lon=${req.body.lon}`)
     const response2 = await fetch(`https://restcountries.eu/rest/v2/alpha/${form_submit_data.country_code}`)
     try{
@@ -82,18 +76,6 @@ app.post("/weather",async (req,res)=>{
     general_info_list.push(language)
     general_info_list.push(currency)
     res.send(general_info_list)
-
-    // if (form_submit_data.days_left_to_departure <= 7){
-    //     temps_list = tmps[0]['temp']
-    //     res.send([temps_list])
-    // }
-    // else{
-    //     for (const {temp:n} of tmps){
-            
-    //         temps_list.push(n)
-    //     }
-    //     res.send(temps_list) 
-    // }
 }
 catch(e){
     console.error(e)
