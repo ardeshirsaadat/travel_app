@@ -10,11 +10,11 @@
   background-color: #022638;
   color: white;
   align-items: center;
-  padding: 50px;
+  padding: 5px;
 }
 
 .header {
-  padding: 50px;
+  padding: 10px;
   grid-area: a;
   display: block;
   #print {
@@ -29,7 +29,7 @@
 .form {
   display: flex;
   flex-direction: column;
-  padding: 50px;
+  padding: 10px;
   grid-area: b;
   #travel-from {
     width: 80%;
@@ -61,13 +61,13 @@
 }
 
 .dynamic-contents {
-  padding: 50px;
+  padding: 10px;
   grid-area: c;
 }
 
 .images {
   grid-area: d;
-  padding: 50px;
+  padding: 10px;
   height: 100%;
   background-size: contain;
   background-repeat: no-repeat;
@@ -79,4 +79,21 @@ table,
 th,
 td {
   border: 1px solid #4ab879;
+}
+
+@media (max-width: 600px) {
+  #screen {
+    display: grid;
+    grid-template-columns: minmax(350px, auto);
+    grid-template-rows: repeat(300px, auto);
+    grid-template-areas:
+      "a"
+      "b"
+      "c"
+      "d";
+  }
+
+  .table {
+    overflow-x: auto;
+  }
 }

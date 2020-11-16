@@ -7,7 +7,7 @@ const bodyParser = require('body-parser')
 const fetch = require('node-fetch')
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:true}))
-const port = 5000
+const port = 4000
 // app.get('/',(req,res)=>{
 //     res.sendFile('./dist/index.html')
 // })

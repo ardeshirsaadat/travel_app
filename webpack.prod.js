@@ -5,6 +5,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 module.exports={
     entry:['@babel/polyfill','./src/client/index.js'],
+    mode: 'production',
     output:{
         libraryTarget:'var',
         library:'Client'
