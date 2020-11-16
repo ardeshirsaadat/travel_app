@@ -3,8 +3,10 @@ const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const WorkboxPlugin = require('workbox-webpack-plugin');
+
 module.exports={
-    entry:['@babel/polyfill','./src/client/index.js'],
+    entry:'./src/client/index.js',
     mode: 'production',
     output:{
         libraryTarget:'var',
@@ -14,13 +16,11 @@ module.exports={
         rules: [
           {
             test: /\.m?js$/,
-            exclude: /(node_modules|bower_components)/,
-            use: {
-              loader: 'babel-loader',
-              options: {
-                presets: ['@babel/preset-env']
-              }
-            }
+            exclude: /node_modules/,
+            
+            loader: 'babel-loader',
+             
+            
           },
           {
             test: /\.scss$/,
@@ -31,7 +31,8 @@ module.exports={
       plugins: [
         new HtmlWebpackPlugin({
             title:"Travel log",
-            template:"./src/client/views/index.html"
+            template:"./src/client/views/index.html",
+            
         }),
         new MiniCssExtractPlugin({filename: '[name].css'}),
         new CleanWebpackPlugin({
@@ -42,6 +43,7 @@ module.exports={
             // Automatically remove all unused webpack assets on rebuild
             cleanStaleWebpackAssets: true,
             protectWebpackAssets: false
-        })
+        }),
+        new WorkboxPlugin.GenerateSW()
       ]
 }

@@ -4,10 +4,12 @@ dotenv.config();
 const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
+const cors =require('cors')
 const fetch = require('node-fetch')
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:true}))
-const port = 4000
+app.use(cors())
+const port = 4001
 app.use(express.static('dist'))
 const server = app.listen(port,()=>{
     console.log(`app is running on ${port}`)
