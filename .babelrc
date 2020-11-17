@@ -1,9 +1,30 @@
 // This is the full .babelrc
 {
-  "presets": ["@babel/preset-env"],
+  "presets":[
+    [
+        "@babel/preset-env",
+        {
+            "exclude": [
+                "transform-regenerator"
+            ]
+        }
+    ]
+],
   "env" : {
 "test": {
     "plugins": ["@babel/plugin-transform-runtime"]
 }
   }
 }
+// {
+//   "presets": [
+//       [
+//           "@babel/preset-env",
+//           {
+//               "exclude": [
+//                   "transform-regenerator"
+//               ]
+//           }
+//       ]
+//   ]
+// }

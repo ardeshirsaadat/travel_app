@@ -1,11 +1,11 @@
 import {fetchFormData,getWeather,getPicture,calculateDaysDifference,updateGui} from "./fetchFormData"
-const submitevent = document.querySelector('#submit')
-let today = new Date()
-submitevent.addEventListener('click',testFunction)
+
+
 
 function testFunction(event){
     event.preventDefault()
     console.log("im here")
+    let today = new Date()
     const travelFrom = document.querySelector("#travel-from").value
     const travelTo = document.querySelector("#travel-to").value
     const travelDepart = document.querySelector("#travel-depart").value

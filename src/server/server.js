@@ -8,12 +8,15 @@ const cors =require('cors')
 const fetch = require('node-fetch')
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended:true}))
-app.use(cors())
-const port = 4001
+// app.use(cors())
+const port = 5000
 app.use(express.static('dist'))
+app.use(cors());
+
 const server = app.listen(port,()=>{
     console.log(`app is running on ${port}`)
 })
+
 // set up form submit data
 app.post("/formdata",async (req,res)=>{
     form_submit_data["travel_from"]=req.body.travel_from

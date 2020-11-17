@@ -3,19 +3,21 @@ const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
-const WorkboxPlugin = require('workbox-webpack-plugin');
+const WorkboxPlugin = require("workbox-webpack-plugin");
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+const TerserPlugin = require('terser-webpack-plugin')
 
 module.exports={
-    entry:'./src/client/index.js',
+    entry:['@babel/polyfill','./src/client/index.js'],
     mode: 'production',
-    output:{
-        libraryTarget:'var',
-        library:'Client'
+    output: {
+      filename: "[name].[contenthash].js",
+      path: path.resolve(__dirname, "dist"),
     },
     module: {
         rules: [
           {
-            test: /\.m?js$/,
+            test: /\.js$/,
             exclude: /node_modules/,
             
             loader: 'babel-loader',
@@ -32,6 +34,8 @@ module.exports={
         new HtmlWebpackPlugin({
             title:"Travel log",
             template:"./src/client/views/index.html",
+            filename: "./index.html",
+            
             
         }),
         new MiniCssExtractPlugin({filename: '[name].css'}),
@@ -44,6 +48,10 @@ module.exports={
             cleanStaleWebpackAssets: true,
             protectWebpackAssets: false
         }),
-        new WorkboxPlugin.GenerateSW()
-      ]
+        new WorkboxPlugin.GenerateSW(),
+        
+      ],
+      optimization: {
+        minimizer: [new TerserPlugin({}), new OptimizeCSSAssetsPlugin({})],
+    },
 }
